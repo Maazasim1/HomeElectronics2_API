@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using test.Models;
+namespace test.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class EmployeeRecordController : ControllerBase
+    {
+        private readonly IConfiguration _configuration;
+        public EmployeeRecordController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+
+        }
+        [HttpGet]
+        public JsonResult Get()
+        {
+            string query = @"select EmployeeID,EmployeeName,PhoneNumber,Address,UserID from dbo.EmployeeRecord";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader); ;
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(table);
+        }
+
+
+        [HttpPost]
+
+        public JsonResult Post(EmployeeRecord emp)
+        {
+            string query = @"insert into dbo.EmployeeRecord (EmployeeID,EmployeeName,PhoneNumber,Address,UserID) values ('" + emp.EmployeeID + @"','" + emp.EmployeeName + @"','" + emp.PhoneNumber + @"','" + emp.Address + @"','" + emp.UserID + @"')";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader); ;
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult("Added!!!!!");
+
+        }
+
+        [HttpPut]
+
+        public JsonResult Put(EmployeeRecord emp)
+        {
+            string query = @"update dbo.EmployeeRecord set EmployeeName = '" + emp.EmployeeName + @"',PhoneNumber = '" + emp.PhoneNumber + @"',Address = '" + emp.Address + @"',UserID = '" + emp.UserID + @"' where EmployeeID = '" + emp.EmployeeID + @"'";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader); ;
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult("Updated!!!!!");
+
+        }
+
+        [HttpDelete("{id}")]
+
+        public JsonResult Delete(int id)
+        {
+            string query = @"delete from dbo.EmployeeRecord where EmployeeID='" + id + @"' ";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader); ;
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult("Deleted!!!!!");
+
+        }
+    }
+}
