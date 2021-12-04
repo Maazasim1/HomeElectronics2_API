@@ -4,15 +4,15 @@
     <Files>
       <File FileName="test/Controllers/ItemDetailsController.cs" Line="1" Column="1" />
       <File FileName="test/Models/StockDetails.cs" />
-      <File FileName="test/Controllers/StockDetailsController.cs" Line="85" Column="45" />
+      <File FileName="test/Controllers/StockDetailsController.cs" />
       <File FileName="test/Controllers/BillChild_POSController.cs" />
-      <File FileName="test/appsettings.json" Line="1" Column="1" />
-      <File FileName="test/Startup.cs" Line="37" Column="94" />
-      <File FileName="test/Program.cs" Line="16" Column="1" />
-      <File FileName="test/Properties/launchSettings.json" Line="24" Column="40" />
-      <File FileName="test/Models/StockTransfer.cs" Line="10" Column="28" />
-      <File FileName="test/Controllers/StockTransferController.cs" Line="88" Column="71" />
-      <File FileName="test/Controllers/WareHouseController.cs" Line="1" Column="1" />
+      <File FileName="test/appsettings.json" />
+      <File FileName="test/Startup.cs" />
+      <File FileName="test/Program.cs" />
+      <File FileName="test/Properties/launchSettings.json" />
+      <File FileName="test/Models/StockTransfer.cs" />
+      <File FileName="test/Controllers/StockTransferController.cs" Line="136" Column="89" />
+      <File FileName="test/Controllers/WareHouseController.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
