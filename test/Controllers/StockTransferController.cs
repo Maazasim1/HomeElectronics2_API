@@ -86,8 +86,7 @@ namespace test.Controllers
                 }
                 else if(StockCheck_ForTo==0)
                 {
-                    return StatusCode(417);
-                    //return new JsonResult("Item not  in To Location");
+                    
                 }
                     using (SqlCommand myCommand3 = new SqlCommand(CheckStockTo, myCon))
                     {
