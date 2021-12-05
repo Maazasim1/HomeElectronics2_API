@@ -33,7 +33,7 @@ namespace test.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myReader = myCommand.ExecuteReader();
-                    table.Load(myReader); ;
+                    table.Load(myReader); 
                     myReader.Close();
                     myCon.Close();
                 }
@@ -56,12 +56,73 @@ namespace test.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myReader = myCommand.ExecuteReader();
-                    table.Load(myReader); ;
+                    table.Load(myReader); 
                     myReader.Close();
                     myCon.Close();
                 }
             }
-            return new JsonResult("Added!!!!!");
+            string fetchFromBillTemp = "select * from Bill_Child_Temp";
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                int BillMasterID;
+                DataTable table2 = new DataTable();
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(fetchFromBillTemp, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table2.Load(myReader); 
+                    myReader.Close();
+                    
+                }
+
+                string BillMaster = "select BillMasterNo from BillMaster_POS where CustomerName like '" + billm.CustomerName + "' And BillCreatedBy like '" + billm.BillCreatedBy + "'";
+                DataTable table3 = new DataTable();
+                using (SqlCommand myCommand = new SqlCommand(BillMaster, myCon))
+                {
+                    
+                    myReader = myCommand.ExecuteReader();
+                    table3.Load(myReader);
+                    BillMasterID = Convert.ToInt32(table3.Rows[0][0]);
+                    myReader.Close();
+                    
+                }
+
+                if (table2.Rows!=null)
+                {
+                    
+                    int count = table2.Rows.Count;
+                    foreach(Bill_Child_Temp i in table2.Rows)
+                    {
+                        string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"','"+i.ItemPrice+","+i.Quantity;
+
+                        using (SqlCommand myCommand = new SqlCommand(Add_to_BillChildPOS, myCon))
+                        {
+                            
+                            myReader = myCommand.ExecuteReader();
+                            
+                           
+                            myReader.Close();
+
+                        }
+
+
+                    }
+                    string truncate_temp = "Truncate table Bill_Child_Temp";
+                    using (SqlCommand myCommand = new SqlCommand(truncate_temp, myCon))
+                    {
+
+                        myReader = myCommand.ExecuteReader();
+
+
+                        myReader.Close();
+
+                    }
+                }
+                myCon.Close();
+            }
+            
+            
+                return new JsonResult("Added!!!!!");
 
         }
 
@@ -79,7 +140,7 @@ namespace test.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myReader = myCommand.ExecuteReader();
-                    table.Load(myReader); ;
+                    table.Load(myReader); 
                     myReader.Close();
                     myCon.Close();
                 }
@@ -102,7 +163,7 @@ namespace test.Controllers
                 using (SqlCommand myCommand = new SqlCommand(query, myCon))
                 {
                     myReader = myCommand.ExecuteReader();
-                    table.Load(myReader); ;
+                    table.Load(myReader); 
                     myReader.Close();
                     myCon.Close();
                 }
