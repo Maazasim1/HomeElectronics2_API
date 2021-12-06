@@ -11,7 +11,7 @@ namespace test.Models
         public string ItemBrand { get; set; }
         public string ItemType { get; set; }
         public float ItemPrice { get; set; }
-        public int Quantity { get; set; }
+        public int ItemQuantity { get; set; }
 
     }
 }

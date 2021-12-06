@@ -19,23 +19,34 @@ namespace test.Controllers
         private readonly IConfiguration _configuration;
         // GET: api/<Bill_Child_Temp>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public JsonResult Get()
         {
-            return new string[] { "value1", "value2" };
+            string query = @"select ItemSKU,ItemBrand,ItemType,ItemPrice,ItemQuantity from dbo.Bill_Child_Temp";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader); ;
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(table);
         }
 
         // GET api/<Bill_Child_Temp>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+
 
         // POST api/<Bill_Child_Temp>
         [HttpPost]
         public void Post(Bill_Child_Temp bct)
         {
-            string Add_ChildTemp = "Insert into Bill_Child_Temp values('" + bct.ItemSKU + "','" + bct.ItemBrand + "','" + bct.ItemType + "'," + bct.ItemPrice + "," + bct.Quantity+")";
+            string Add_ChildTemp = "Insert into Bill_Child_Temp values('" + bct.ItemSKU + "','" + bct.ItemBrand + "','" + bct.ItemType + "'," + bct.ItemPrice + "," + bct.ItemQuantity+")";
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
             DataTable table = new DataTable();
