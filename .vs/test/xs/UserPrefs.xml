@@ -1,18 +1,19 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{6D2ECE54-3CF7-42B5-99EA-3C61FDC7C35D}|Default">
   <MonoDevelop.Ide.ItemProperties.test PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="test/Controllers/StockTransferController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="test/Controllers/BillChild_POSController.cs">
     <Files>
       <File FileName="test/Controllers/ItemDetailsController.cs" Line="1" Column="1" />
       <File FileName="test/Models/StockDetails.cs" />
       <File FileName="test/Controllers/StockDetailsController.cs" />
-      <File FileName="test/Controllers/BillChild_POSController.cs" />
+      <File FileName="test/Controllers/BillChild_POSController.cs" Line="58" Column="1" />
       <File FileName="test/appsettings.json" />
       <File FileName="test/Startup.cs" />
       <File FileName="test/Program.cs" />
       <File FileName="test/Properties/launchSettings.json" />
       <File FileName="test/Models/StockTransfer.cs" />
-      <File FileName="test/Controllers/StockTransferController.cs" Line="136" Column="89" />
+      <File FileName="test/Controllers/StockTransferController.cs" />
       <File FileName="test/Controllers/WareHouseController.cs" />
+      <File FileName="test/Controllers/BillMaster_POSController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -20,16 +21,13 @@
           <Node name="test" expanded="True">
             <Node name="test" expanded="True">
               <Node name="Controllers" expanded="True">
-                <Node name="StockTransferController.cs" selected="True" />
+                <Node name="BillChild_POSController.cs" selected="True" />
               </Node>
               <Node name="Models" expanded="True" />
               <Node name="Properties" expanded="True" />
             </Node>
           </Node>
         </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
