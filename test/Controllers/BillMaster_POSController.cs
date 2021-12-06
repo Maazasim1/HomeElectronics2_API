@@ -46,7 +46,9 @@ namespace test.Controllers
 
         public JsonResult Post(BillMaster_POS billm)
         {
-            string query = @"insert into dbo.BillMaster_POS (BillMasterNO,BillCreatedBy,BillCreatedOn,BillChildID,BillModifiedOn,CustomerName,CustomerPhoneNumber,CustomerAddress,DeliveryCharges,InstallationChares) values ('" + billm.BillMasterNO + @"','" + billm.BillCreatedBy + @"','" + DateTime.Now + @"','" + billm.BillChildID + @"','" + billm.BillModifiedOn + @"','" + billm.CustomerName + @"','" + billm.CustomerPhoneNumber + @"','" + billm.CustomerAddress + @"','" + billm.DeliveryCharges + @"','" + billm.InstallationChares + @"')";
+
+            // string query = @"insert into dbo.BillMaster_POS (BillCreatedBy,BillCreatedOn,BillModifiedOn,CustomerName,CustomerPhoneNumber,CustomerAddress,DeliveryCharges,InstallationChares,totalAmount) values ('" + billm.BillCreatedBy + @"','" + DateTime.Now + @"','"  + @"','" + billm.BillModifiedOn + @"','" + billm.CustomerName + @"','" + billm.CustomerPhoneNumber + @"','" + billm.CustomerAddress + @"','" + billm.DeliveryCharges + @"','" + billm.InstallationChares + @" ," + billm.totalAmount + @"')";
+            string query = "Insert into BillMaster_POS values('"+billm.BillCreatedBy+"','"+billm.BillCreatedOn+"',NULL,'"+billm.CustomerName+"','"+billm.CustomerPhoneNumber+"','"+billm.CustomerAddress+"',"+billm.DeliveryCharges+","+billm.InstallationChares+","+billm.totalAmount+")";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
@@ -91,9 +93,13 @@ namespace test.Controllers
                 {
                     
                     int count = table2.Rows.Count;
-                    foreach(Bill_Child_Temp i in table2.Rows)
+                    int count2 = table2.Columns.Count;
+                    for(int j=0;j< count; j++)
                     {
-                        string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"','"+i.ItemPrice+","+i.Quantity;
+                        BillChild_POS i = new BillChild_POS();
+                        
+                        i.BillMasterID = BillMasterID;  i.ItemSKU = table2.Rows[j][1].ToString();   i.ItemBrand = table2.Rows[j][2].ToString(); i.ItemType = table2.Rows[j][3].ToString();  i.ItemPrice = Convert.ToInt32(table2.Rows[j][4]);   i.ItemQuantity = Convert.ToInt32(table2.Rows[j][5]);
+                        string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"',"+i.ItemPrice+","+i.ItemQuantity+")";
 
                         using (SqlCommand myCommand = new SqlCommand(Add_to_BillChildPOS, myCon))
                         {
@@ -130,7 +136,7 @@ namespace test.Controllers
 
         public JsonResult Put(BillMaster_POS billm)
         {
-            string query = @"update dbo.BillMaster_POS set BillMasterNO = '" + billm.BillMasterNO + @"',BillCreatedBy = '" + billm.BillCreatedBy + @"',BillChildID = '" + billm.BillChildID + @"',BillModifiedOn = '" + DateTime.Now + @"',CustomerName='" + billm.CustomerName + @"',CustomerPhoneNumber='" + billm.CustomerPhoneNumber + @"',CustomerAddress='" + billm.CustomerAddress + @"',DeliveryCharges='" + billm.DeliveryCharges + @"',InstallationChares='" + billm.InstallationChares + @"' where BillMasterNO = '" + billm.BillMasterNO + @"'";
+            string query = @"update dbo.BillMaster_POS set BillMasterNO = '" + billm.BillMasterNO + @"',BillCreatedBy = '" + billm.BillCreatedBy +  @"',BillModifiedOn = '" + DateTime.Now + @"',CustomerName='" + billm.CustomerName + @"',CustomerPhoneNumber='" + billm.CustomerPhoneNumber + @"',CustomerAddress='" + billm.CustomerAddress + @"',DeliveryCharges='" + billm.DeliveryCharges + @"',InstallationChares='" + billm.InstallationChares + @"' where BillMasterNO = '" + billm.BillMasterNO + @"'";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;

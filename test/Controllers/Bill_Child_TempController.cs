@@ -17,6 +17,11 @@ namespace test.Controllers
     public class Bill_Child_TempController : ControllerBase
     {
         private readonly IConfiguration _configuration;
+        public Bill_Child_TempController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+
+        }
         // GET: api/<Bill_Child_Temp>
         [HttpGet]
         public JsonResult Get()
