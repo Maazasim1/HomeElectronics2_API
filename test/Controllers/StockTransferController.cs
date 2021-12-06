@@ -86,6 +86,17 @@ namespace test.Controllers
                     //return new JsonResult("Item not  in From Location");
                 }
                 
+
+
+
+
+
+
+
+
+
+
+
                     using (SqlCommand myCommand = new SqlCommand(CheckStockFr, myCon))
                     {
                         myReader = myCommand.ExecuteReader();
@@ -119,7 +130,7 @@ namespace test.Controllers
                             else {
 
 
-                                int currentQuantity;
+                               
 
 
                                 SqlCommand myCommand3 = new SqlCommand(CheckStockTo, myCon);

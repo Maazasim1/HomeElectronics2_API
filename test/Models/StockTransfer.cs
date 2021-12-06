@@ -8,5 +8,7 @@ namespace test.Models
         public int To_LocationID { get; set; }
         public int Stock_TrasferDetailsID { get; set; }
         public int Quantity { get; set; }
+        public string ItemBrand { get; set; }
+        public string ItemType { get; set; }
     }
 }
