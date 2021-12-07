@@ -93,7 +93,7 @@ namespace test.Controllers
                     int count = table2.Rows.Count;
                     foreach(Bill_Child_Temp i in table2.Rows)
                     {
-                        string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"','"+i.ItemPrice+","+i.ItemQuantity;
+                        string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"','"+i.ItemPrice+","+i.ItemQuatity;
 
                         using (SqlCommand myCommand = new SqlCommand(Add_to_BillChildPOS, myCon))
                         {

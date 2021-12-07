@@ -1,11 +1,12 @@
 ﻿<Properties StartupConfiguration="{6D2ECE54-3CF7-42B5-99EA-3C61FDC7C35D}|Default">
   <MonoDevelop.Ide.ItemProperties.test PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="test/Controllers/BillMaster_POSController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="test/Controllers/StockDetailsController.cs">
     <Files>
-      <File FileName="test/Controllers/Bill_Child_TempController.cs" Line="45" Column="175" />
-      <File FileName="test/Controllers/BillChild_POSController.cs" Line="22" Column="10" />
-      <File FileName="test/Models/Bill_Child_Temp.cs" Line="14" Column="24" />
-      <File FileName="test/Controllers/BillMaster_POSController.cs" Line="96" Column="192" />
+      <File FileName="test/Controllers/Bill_Child_TempController.cs" Line="56" Column="178" />
+      <File FileName="test/Controllers/BillChild_POSController.cs" />
+      <File FileName="test/Models/Bill_Child_Temp.cs" />
+      <File FileName="test/Controllers/BillMaster_POSController.cs" />
+      <File FileName="test/Controllers/StockDetailsController.cs" Line="93" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,7 +14,7 @@
           <Node name="test" expanded="True">
             <Node name="test" expanded="True">
               <Node name="Controllers" expanded="True">
-                <Node name="BillMaster_POSController.cs" selected="True" />
+                <Node name="StockDetailsController.cs" selected="True" />
               </Node>
               <Node name="Models" expanded="True" />
             </Node>

@@ -27,7 +27,7 @@ namespace test.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select ItemSKU,ItemBrand,ItemType,ItemPrice,ItemQuantity from dbo.Bill_Child_Temp";
+            string query = @"select ItemSKU,ItemBrand,ItemType,ItemPrice,ItemQuatity from dbo.Bill_Child_Temp";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
@@ -52,11 +52,8 @@ namespace test.Controllers
         [HttpPost]
         public void Post(Bill_Child_Temp bct)
         {
-<<<<<<< HEAD
 
-=======
->>>>>>> b61449dbe2fb3657c59357b4fcc9ef42e52b970f
-            string Add_ChildTemp = "Insert into Bill_Child_Temp values('" + bct.ItemSKU + "','" + bct.ItemBrand + "','" + bct.ItemType + "'," + bct.ItemPrice + "," + bct.ItemQuantity+")";
+            string Add_ChildTemp = "Insert into Bill_Child_Temp values('" + bct.ItemSKU + "','" + bct.ItemBrand + "','" + bct.ItemType + "'," + bct.ItemPrice + "," + bct.ItemQuatity+")";
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
             DataTable table = new DataTable();
