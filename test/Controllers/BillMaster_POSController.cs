@@ -96,14 +96,14 @@ namespace test.Controllers
                     int count2 = table2.Columns.Count;
                     for(int j=0;j< count; j++)
                     {
-<<<<<<< HEAD
-                        string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"','"+i.ItemPrice+","+i.ItemQuatity;
-=======
+
+                      //  string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"','"+i.ItemPrice+","+i.ItemQuatity;
+
                         BillChild_POS i = new BillChild_POS();
                         
                         i.BillMasterID = BillMasterID;  i.ItemSKU = table2.Rows[j][1].ToString();   i.ItemBrand = table2.Rows[j][2].ToString(); i.ItemType = table2.Rows[j][3].ToString();  i.ItemPrice = Convert.ToInt32(table2.Rows[j][4]);   i.ItemQuantity = Convert.ToInt32(table2.Rows[j][5]);
                         string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"',"+i.ItemPrice+","+i.ItemQuantity+")";
->>>>>>> ffddefd1773ec88f59c036ca2b405e3c32e3ad15
+
 
                         using (SqlCommand myCommand = new SqlCommand(Add_to_BillChildPOS, myCon))
                         {
@@ -128,6 +128,8 @@ namespace test.Controllers
 
                     }
                 }
+
+
                 myCon.Close();
             }
             
