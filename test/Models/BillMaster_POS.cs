@@ -13,5 +13,6 @@ namespace test.Models
         public string DeliveryCharges { get; set; }
         public string InstallationChares { get; set; }
         public int totalAmount { get; set; }
+
     }
 }

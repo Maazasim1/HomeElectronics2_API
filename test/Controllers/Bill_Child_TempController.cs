@@ -22,10 +22,7 @@ namespace test.Controllers
             _configuration = configuration;
 
         }
-<<<<<<< HEAD
-        
-=======
->>>>>>> ffddefd1773ec88f59c036ca2b405e3c32e3ad15
+
         // GET: api/<Bill_Child_Temp>
         [HttpGet]
         public JsonResult Get()
