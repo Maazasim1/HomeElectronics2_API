@@ -16,5 +16,12 @@ namespace test.Models
         
         public string SaleType { get; set; }
 
+        public string MethodPayment { get; set; }
+
+        public string ChequeNumber { get; set; }
+
+        public string BankName { get; set; }
+
+
     }
 }

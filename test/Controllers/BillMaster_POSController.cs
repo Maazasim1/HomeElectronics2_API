@@ -46,7 +46,7 @@ namespace test.Controllers
 
         public JsonResult Post(BillMaster_POS billm)
         {
-
+            BillChild_POS i = new BillChild_POS();
             // string query = @"insert into dbo.BillMaster_POS (BillCreatedBy,BillCreatedOn,BillModifiedOn,CustomerName,CustomerPhoneNumber,CustomerAddress,DeliveryCharges,InstallationChares,totalAmount) values ('" + billm.BillCreatedBy + @"','" + DateTime.Now + @"','"  + @"','" + billm.BillModifiedOn + @"','" + billm.CustomerName + @"','" + billm.CustomerPhoneNumber + @"','" + billm.CustomerAddress + @"','" + billm.DeliveryCharges + @"','" + billm.InstallationChares + @" ," + billm.totalAmount + @"')";
             string query = "Insert into BillMaster_POS values('"+billm.BillCreatedBy+"','"+billm.BillCreatedOn+"',NULL,'"+billm.CustomerName+"','"+billm.CustomerPhoneNumber+"','"+billm.CustomerAddress+"',"+billm.DeliveryCharges+","+billm.InstallationChares+","+billm.totalAmount+")";
             DataTable table = new DataTable();
@@ -97,9 +97,8 @@ namespace test.Controllers
                     for(int j=0;j< count; j++)
                     {
 
-                      //  string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"','"+i.ItemPrice+","+i.ItemQuatity;
-
-                        BillChild_POS i = new BillChild_POS();
+                      
+                        
                         
                         i.BillMasterID = BillMasterID;  i.ItemSKU = table2.Rows[j][1].ToString();   i.ItemBrand = table2.Rows[j][2].ToString(); i.ItemType = table2.Rows[j][3].ToString();  i.ItemPrice = Convert.ToInt32(table2.Rows[j][4]);   i.ItemQuantity = Convert.ToInt32(table2.Rows[j][5]);
                         string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',' "+ i.ItemBrand+"','"+ i.ItemType+"',"+i.ItemPrice+","+i.ItemQuantity+")";
