@@ -22,12 +22,33 @@ namespace test.Controllers
             _configuration = configuration;
 
         }
+        [HttpGet("{SalesmanName}")]
+        public JsonResult Get(String SalesmanName)
+        {
+            string Query = "Select * from Bill_Child_Temp where SalesmanName like '%"+SalesmanName+"%'";
+            DataTable table = new DataTable();
+            string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
+            SqlDataReader myReader;
+            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            {
+                myCon.Open();
+                using (SqlCommand myCommand = new SqlCommand(Query, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader); ;
+                    myReader.Close();
+                    myCon.Close();
+                }
+            }
+            return new JsonResult(table);
+           
+        }
 
         // GET: api/<Bill_Child_Temp>
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select ItemSKU,ItemBrand,ItemType,ItemPrice,ItemQuatity from dbo.Bill_Child_Temp";
+            string query ="Select * from Bill_Child_Temp";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
