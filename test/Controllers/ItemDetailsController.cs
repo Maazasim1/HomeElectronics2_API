@@ -46,7 +46,7 @@ namespace test.Controllers
 
         public JsonResult Post(ItemDetails itm)
         {
-            string query = @"insert into dbo.ItemDetails (ItemName,Type,Brand,ModelNumber) values ('"+ itm.ItemName + @"','" + itm.Type + @"','" + itm.Brand + @"','" + itm.ModelNumber + @"')";
+            string query = @"insert into dbo.ItemDetails (ItemType,ItemBrand,ModelNumber) values ('" + itm.ItemType + @"','" + itm.ItemBrand + @"','" + itm.ModelNumber + @"')";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
@@ -65,12 +65,12 @@ namespace test.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut ("{id}")]
 
-        public JsonResult Put(ItemDetails itm)
+        public JsonResult Put(ItemDetails itm,string id)
         {
             
-            string query = @"update dbo.ItemDetails set ItemName = '"+itm.ItemName+"',ItemType='"+itm.Type+"',ItemBrand='"+itm.Brand+"',ModelNumber='"+itm.ModelNumber+"'  where ModelNumber like '%"+itm.ModelNumber+"%'";
+            string query = @"update dbo.ItemDetails set ItemType='"+itm.ItemType+"',ItemBrand='"+itm.ItemBrand+"',ModelNumber='"+itm.ModelNumber+"'  where ModelNumber like '%"+id+"%'";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;

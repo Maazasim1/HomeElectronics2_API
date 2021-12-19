@@ -129,9 +129,9 @@ namespace test.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
 
-        public JsonResult Put(StockDetails std)
+        public JsonResult Put(StockDetails std,id)
         {
             string query = @"update dbo.StockDetails set Item_ModelNumber = '" + std.Item_ModelNumber + @"',WareHouseID = '" + std.WareHouseID + @"',Quantity = '" + std.Quantity + @"',StockAdd_Datetime = '" + DateTime.Now + @"' where ID = '" + std.ID + @"'";
             DataTable table = new DataTable();

@@ -23,7 +23,7 @@ namespace test.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select BillMasterID,ItemSKU,ItemBrand,ItemType,ItemPrice,ItemQuantity from dbo.BillChild_POS";
+            string query = @"select * from dbo.BillChild_POS";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
@@ -46,7 +46,7 @@ namespace test.Controllers
 
         public JsonResult Post(BillChild_POS bill)
         {
-            string query = @"insert into dbo.BillChild_POS (ItemSKU,ItemBrand,ItemType,ItemPrice,ItemQuantity) values ('" + bill.ItemSKU + @"','" + bill.ItemBrand + @"','" + bill.ItemType + @"','" + bill.ItemPrice + @"','" + bill.ItemQuantity + @"')";
+            string query = @"insert into dbo.BillChild_POS (ItemSKU,ItemPrice,ItemQuantity,BillMasterID) values ('"+bill.ItemSKU+"','"+bill.ItemPrice+"','"+bill.ItemQuantity+"','"+bill.BillMasterID+")";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
@@ -65,11 +65,11 @@ namespace test.Controllers
 
         }
 
-        [HttpPut]
+        [HttpPut("{id}")]
 
-        public JsonResult Put(BillChild_POS bill)
+        public JsonResult Put(BillChild_POS bill,int id)
         {
-            string query = @"update dbo.BillChild_POS set ItemSKU = '" + bill.ItemSKU + @"',ItemBrand = '" + bill.ItemBrand + @"',ItemType = '" + bill.ItemType + @"',ItemPrice = '" + bill.ItemPrice + @"',ItemQuantity = '" + bill.ItemQuantity + @"' where BillMasterID = '" + bill.BillMasterID + @"'";
+            string query = @"update dbo.BillChild_POS set ItemSKU = '"+bill.ItemSKU+"',BillMasterID="+bill.BillMasterID+",ItemPrice="+bill.ItemPrice+",ItemQuantity="+bill.ItemQuantity+" where BillChildID="+id;
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;

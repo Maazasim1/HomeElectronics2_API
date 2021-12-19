@@ -7,9 +7,7 @@ namespace test.Models
         public string BillCreatedBy { get; set; }
         public string BillCreatedOn { get; set; }
         public string BillModifiedOn { get; set; }
-        public string CustomerName { get; set; }
-        public string CustomerPhoneNumber { get; set; }
-        public string CustomerAddress { get; set; }
+        public string CustomerCNIC { get;set;}
         public string DeliveryCharges { get; set; }
         public string InstallationChares { get; set; }
         public int totalAmount { get; set; }
