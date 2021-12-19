@@ -14,11 +14,14 @@ namespace test.Models
         
         public string SaleType { get; set; }
 
-        public string MethodPayment { get; set; }
+        public string PaymentMethod { get; set; }
 
         public string ChequeNumber { get; set; }
+        public string ChequeDate { get;set;}
+
 
         public string BankName { get; set; }
+        public string BankAccountNumber { get;set;}
 
 
     }

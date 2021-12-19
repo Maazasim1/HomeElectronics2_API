@@ -127,6 +127,46 @@ namespace test.Controllers
 
                     }
                 }
+                switch (billm.PaymentMethod)
+                {
+                    case "Cash":
+                        string Cashquery="Insert into PaymentDetails values("+BillMasterID+",'"+billm.PaymentMethod+"',"+billm.totalAmount+",NULL,NULL,NULL,NULL,NULL)";
+                        using (SqlCommand myCommand = new SqlCommand(Cashquery, myCon))
+                        {
+
+                        myReader = myCommand.ExecuteReader();
+
+
+                        myReader.Close();
+
+                         }
+                        break;
+                    case "Cheque":
+                        string Chequequery="Insert into PaymentDetails values("+BillMasterID+",'"+billm.PaymentMethod+"',"+billm.totalAmount+",'"+billm.ChequeNumber+"','"+billm.ChequeDate+"',NULL,NULL,NULL)";
+                        using (SqlCommand myCommand = new SqlCommand(Chequequery, myCon))
+                        {
+
+                        myReader = myCommand.ExecuteReader();
+
+
+                        myReader.Close();
+
+                         }
+                        break;
+                      case "Bank Transfer":
+                        string Bankquery="Insert into PaymentDetails values("+BillMasterID+",'"+billm.PaymentMethod+"',"+billm.totalAmount+",NULL,NULL,'"+billm.BankAccountNumber+"',NULL,'"+billm.BankName+"')";
+                        using (SqlCommand myCommand = new SqlCommand(Bankquery, myCon))
+                        {
+
+                        myReader = myCommand.ExecuteReader();
+
+
+                        myReader.Close();
+
+                         }
+                        break;
+
+                }
 
 
                 myCon.Close();
