@@ -63,7 +63,7 @@ namespace test.Controllers
                     myCon.Close();
                 }
             }
-            string fetchFromBillTemp = "select * from Bill_Child_Temp";
+            string fetchFromBillTemp = "select * from Bill_Child_Temp where SalesmanName like '%"+billm.BillCreatedBy+"%'";
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
                 int BillMasterID;
@@ -100,7 +100,7 @@ namespace test.Controllers
                       
                         
                         
-                        i.BillMasterID = BillMasterID;  i.ItemSKU = table2.Rows[j][1].ToString();   i.ItemBrand = table2.Rows[j][2].ToString(); i.ItemType = table2.Rows[j][3].ToString();  i.ItemPrice = Convert.ToInt32(table2.Rows[j][4]);   i.ItemQuantity = Convert.ToInt32(table2.Rows[j][5]);
+                        i.BillMasterID = BillMasterID;  i.ItemSKU = table2.Rows[j][1].ToString(); i.ItemPrice = Convert.ToInt32(table2.Rows[j][2]);   i.ItemQuantity = Convert.ToInt32(table2.Rows[j][3]);
                         string Add_to_BillChildPOS = "Insert into BillChild_POS values(" + BillMasterID + ",'" + i.ItemSKU + "',"+i.ItemPrice+","+i.ItemQuantity+")";
 
 
