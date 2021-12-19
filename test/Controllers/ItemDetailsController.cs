@@ -23,7 +23,7 @@ namespace test.Controllers
         [HttpGet]
         public JsonResult Get()
         {
-            string query = @"select ItemID,ItemName,Type,Brand,ModelNumber from dbo.ItemDetails";
+            string query = @"select * from dbo.ItemDetails";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
@@ -46,8 +46,7 @@ namespace test.Controllers
 
         public JsonResult Post(ItemDetails itm)
         {
-            string query = @"insert into dbo.ItemDetails ( ItemID,ItemName,Type,Brand,ModelNumber) values ('" + itm.ItemID + @"','" + itm.ItemName + @"','" + itm.Type + @"','" + itm.Brand + @"','" + itm.ModelNumber
-                + @"')";
+            string query = @"insert into dbo.ItemDetails (ItemName,Type,Brand,ModelNumber) values ('"+ itm.ItemName + @"','" + itm.Type + @"','" + itm.Brand + @"','" + itm.ModelNumber + @"')";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
@@ -70,7 +69,8 @@ namespace test.Controllers
 
         public JsonResult Put(ItemDetails itm)
         {
-            string query = @"update dbo.ItemDetails set ItemName = '" + itm.ItemName + @"',Type = '" + itm.Type + @"',Brand = '" + itm.Brand + @"',ModelNumber = '" + itm.ModelNumber + @"' where ItemID = '" + itm.ItemID + @"'";
+            
+            string query = @"update dbo.ItemDetails set ItemName = '"+itm.ItemName+"',ItemType='"+itm.Type+"',ItemBrand='"+itm.Brand+"',ModelNumber='"+itm.ModelNumber+"'  where ModelNumber like '%"+itm.ModelNumber+"%'";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
@@ -91,9 +91,9 @@ namespace test.Controllers
 
         [HttpDelete("{id}")]
 
-        public JsonResult Delete(int id)
+        public JsonResult Delete(String id)
         {
-            string query = @"delete from dbo.ItemDetails where ItemID='" + id + @"' ";
+            string query = @"delete from dbo.ItemDetails where ModelNumber='" + id + @"' ";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;

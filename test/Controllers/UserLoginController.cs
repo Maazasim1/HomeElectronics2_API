@@ -48,6 +48,8 @@ namespace test.Controllers
 
         public JsonResult Post(UserLogin lgn)
         {
+            string s = @"SELECT COUNT(*) FROM dbo.UserLogin WHERE UserName = '" + lgn.UserName + "' AND Password = '" + lgn.Password + @"'";
+
             string query = @"insert into dbo.UserLogin (UserName,Password,UserID,UserType,UserLogin_DateTime) values ('" + lgn.UserName + @"','" + lgn.Password + @"','" + lgn.UserID + @"','" + lgn.UserType + @"','" + DateTime.Now + @"')";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
@@ -55,8 +57,14 @@ namespace test.Controllers
             using (SqlConnection myCon = new SqlConnection(sqlDataSource))
             {
                 myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                using (SqlCommand myCommand = new SqlCommand(s, myCon))
                 {
+                    int records = (int)myCommand.ExecuteScalar();
+                    if (records > 0)
+                    {
+                        return new JsonResult("token123");
+                    }
+
                     myReader = myCommand.ExecuteReader();
                     table.Load(myReader); ;
                     myReader.Close();

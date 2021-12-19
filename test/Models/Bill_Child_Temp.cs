@@ -13,5 +13,6 @@ namespace test.Models
         public float ItemPrice { get; set; }
         public int ItemQuatity { get; set; }
 
+        public string SalesmanName { get; set; }
     }
 }
