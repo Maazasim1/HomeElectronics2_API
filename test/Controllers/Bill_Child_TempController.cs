@@ -74,7 +74,7 @@ namespace test.Controllers
         public void Post(Bill_Child_Temp bct)
         {
 
-            string Add_ChildTemp = "Insert into Bill_Child_Temp values('" + bct.ItemSKU + "'," + bct.ItemPrice + "," + bct.ItemQuatity+","+bct.SalesmanName+")";
+            string Add_ChildTemp = "Insert into Bill_Child_Temp values('" + bct.ItemSKU + "'," + bct.ItemPrice + "," + bct.ItemQuatity+",'"+bct.SalesmanName+"')";
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
             DataTable table = new DataTable();

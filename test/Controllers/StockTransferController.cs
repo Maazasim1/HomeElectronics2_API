@@ -85,7 +85,6 @@ namespace test.Controllers
                     return StatusCode(416);
                     //return new JsonResult("Item not  in From Location");
                 }
-                
 
 
 
@@ -97,26 +96,46 @@ namespace test.Controllers
 
 
 
-                    using (SqlCommand myCommand = new SqlCommand(CheckStockFr, myCon))
+
+                using (SqlCommand myCommand = new SqlCommand(CheckStockFr, myCon))
+                {
+                    myReader = myCommand.ExecuteReader();
+                    table.Load(myReader);
+                    int currentQuantityFromWr = Convert.ToInt32(table.Rows[0][0]);
+
+                    if ((currentQuantityFromWr - trf.Quantity) < 0)
                     {
-                        myReader = myCommand.ExecuteReader();
-                        table.Load(myReader);
-                        int currentQuantityFromWr = Convert.ToInt32(table.Rows[0][0]);
-
-                        if ((currentQuantityFromWr - trf.Quantity) < 0)
-                        {
-                            myReader.Close();
-                            myCon.Close();
-                            return StatusCode(418);
-                            //return new JsonResult("Stock less than available");
-                        }
-                        else
-                        {
-                        string AddStock = "Insert into StockDetails values ('" + trf.ItemModelNumber + "'," + trf.To_LocationID + "," + trf.Quantity + "," + DateTime.Now;
+                        myReader.Close();
+                        myCon.Close();
+                        return StatusCode(418);
+                        //return new JsonResult("Stock less than available");
+                    }
+                    else
+                    {
                         using (SqlCommand myCommand2 = new SqlCommand(query, myCon))
+                        
+
+
+
                         {
                             if (StockCheck_ForTo == 0)
                             {
+                                string GetunitPrice = "Select UnitPrice from StockDetails where WarehouseID=" + trf.From_LocationID + " and Item_ModelNumber like '%" + trf.ItemModelNumber + "%'";
+                                int unit_price;
+                                using (SqlCommand myCommand42 = new SqlCommand(GetunitPrice, myCon))
+                                {
+                                    DataTable table42 = new DataTable();
+                                    SqlDataReader myReader42;
+                                    myReader42 = myCommand42.ExecuteReader();
+                                    table42.Load(myReader42);
+                                    unit_price = Convert.ToInt32(table42.Rows[0][0]);
+                                    myReader42.Close();
+                                }
+
+
+                                string DateToday = DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year;
+                                string AddStock = "Insert into StockDetails values ('" + trf.ItemModelNumber + "'," + trf.To_LocationID + "," + trf.Quantity + "," + DateToday + "," + unit_price + ")";
+
                                 using (SqlCommand myCommand41 = new SqlCommand(AddStock, myCon))
                                 {
                                     DataTable table41 = new DataTable();
@@ -126,59 +145,68 @@ namespace test.Controllers
 
                                     myReader41.Close();
                                 }
+
+
+                                DataTable table2 = new DataTable();
+                                SqlDataReader myReader2;
+                                myReader2 = myCommand2.ExecuteReader();
+                                table2.Load(myReader2);
+                                myReader2.Close();
                             }
-                            else {
+                            else
+                            {
 
 
-                               
+
 
 
                                 SqlCommand myCommand3 = new SqlCommand(CheckStockTo, myCon);
-                                    
-                                        DataTable table3 = new DataTable();
-                                        SqlDataReader myReader3;
-                                        myReader3 = myCommand3.ExecuteReader();
-                                        table3.Load(myReader3);
-                                        currentQuantityFromTo = Convert.ToInt32(table3.Rows[0][0]);
-                                        
-                                        myReader3.Close();
-                                    
-                                
 
-                                
+                                DataTable table3 = new DataTable();
+                                SqlDataReader myReader3;
+                                myReader3 = myCommand3.ExecuteReader();
+                                table3.Load(myReader3);
+                                currentQuantityFromTo = Convert.ToInt32(table3.Rows[0][0]);
+
+                                myReader3.Close();
+
+
+
+
 
 
 
                                 DataTable table2 = new DataTable();
-                            SqlDataReader myReader2;
-                            myReader2 = myCommand2.ExecuteReader();
-                            table2.Load(myReader2);
-                            myReader2.Close();
-                            string UpdateStock = "update StockDetails set Quantity=" + (currentQuantityFromTo + trf.Quantity) + " where WareHouseID=" + trf.To_LocationID + " and Item_ModelNumber like '" + trf.ItemModelNumber + "'";
-                            using (SqlCommand myCommand40 = new SqlCommand(UpdateStock, myCon))
-                            {
-                                DataTable table40 = new DataTable();
-                                SqlDataReader myReader40;
-                                myReader40 = myCommand40.ExecuteReader();
-                                table40.Load(myReader40);
-
-                                myReader40.Close();
-                            }
-                        }
-                                string UpdateStockFrom = "update StockDetails set Quantity=" + (currentQuantityFromWr - trf.Quantity) + " where WareHouseID=" + trf.From_LocationID + " and Item_ModelNumber like '" + trf.ItemModelNumber + "'";
-                                using (SqlCommand myCommand5 = new SqlCommand(UpdateStockFrom, myCon))
+                                SqlDataReader myReader2;
+                                myReader2 = myCommand2.ExecuteReader();
+                                table2.Load(myReader2);
+                                myReader2.Close();
+                                string UpdateStock = "update StockDetails set Quantity=" + (currentQuantityFromTo + trf.Quantity) + " where WareHouseID=" + trf.To_LocationID + " and Item_ModelNumber like '" + trf.ItemModelNumber + "'";
+                                using (SqlCommand myCommand40 = new SqlCommand(UpdateStock, myCon))
                                 {
-                                    DataTable table5 = new DataTable();
-                                    SqlDataReader myReader5;
-                                    myReader5 = myCommand5.ExecuteReader();
-                                    table5.Load(myReader5);
+                                    DataTable table40 = new DataTable();
+                                    SqlDataReader myReader40;
+                                    myReader40 = myCommand40.ExecuteReader();
+                                    table40.Load(myReader40);
 
-                                    myReader5.Close();
+                                    myReader40.Close();
                                 }
-                                myCon.Close();
-                                //return new JsonResult("Added!!!!!");
-                            }   return StatusCode(200);
+                            }
+                            string UpdateStockFrom = "update StockDetails set Quantity=" + (currentQuantityFromWr - trf.Quantity) + " where WareHouseID=" + trf.From_LocationID + " and Item_ModelNumber like '" + trf.ItemModelNumber + "'";
+                            using (SqlCommand myCommand5 = new SqlCommand(UpdateStockFrom, myCon))
+                            {
+                                DataTable table5 = new DataTable();
+                                SqlDataReader myReader5;
+                                myReader5 = myCommand5.ExecuteReader();
+                                table5.Load(myReader5);
+
+                                myReader5.Close();
+                            }
+                            myCon.Close();
+                            //return new JsonResult("Added!!!!!");
                         }
+                        return StatusCode(200);
+
 
 
                     }
@@ -188,7 +216,7 @@ namespace test.Controllers
 
 
 
-                
+                }
             }
             
 

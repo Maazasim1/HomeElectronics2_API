@@ -131,9 +131,9 @@ namespace test.Controllers
 
         [HttpPut("{id}")]
 
-        public JsonResult Put(StockDetails std,id)
+        public JsonResult Put(StockDetails std,int id)
         {
-            string query = @"update dbo.StockDetails set Item_ModelNumber = '" + std.Item_ModelNumber + @"',WareHouseID = '" + std.WareHouseID + @"',Quantity = '" + std.Quantity + @"',StockAdd_Datetime = '" + DateTime.Now + @"' where ID = '" + std.ID + @"'";
+            string query = @"update dbo.StockDetails set Item_ModelNumber = '" + std.Item_ModelNumber + @"',WareHouseID = '" + std.WareHouseID + @"',Quantity = '" + std.Quantity + @"',StockAdd_Datetime = '" + DateTime.Now + @"' where ID = '" + id + @"'";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;

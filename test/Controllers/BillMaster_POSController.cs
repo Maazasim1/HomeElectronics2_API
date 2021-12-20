@@ -181,7 +181,7 @@ namespace test.Controllers
 
         public JsonResult Put(BillMaster_POS billm)
         {
-            string query = @"update dbo.BillMaster_POS set BillMasterNO = '" + billm.BillMasterNO + @"',BillCreatedBy = '" + billm.BillCreatedBy +  @"',BillModifiedOn = '" + DateTime.Now + @"',CustomerName='" + billm.CustomerName + @"',CustomerPhoneNumber='" + billm.CustomerPhoneNumber + @"',CustomerAddress='" + billm.CustomerAddress + @"',DeliveryCharges='" + billm.DeliveryCharges + @"',InstallationChares='" + billm.InstallationChares + @"' where BillMasterNO = '" + billm.BillMasterNO + @"'";
+            string query = @"update dbo.BillMaster_POS set BillMasterNO = '" + billm.BillMasterNO + @"',BillCreatedBy = '" + billm.BillCreatedBy +  @"',BillModifiedOn = '" + DateTime.Now + @"',CustomerCNIC='" + billm.CustomerCNIC + @"',DeliveryCharges='" + billm.DeliveryCharges + @"',InstallationChares='" + billm.InstallationChares + @"' where BillMasterNO = '" + billm.BillMasterNO + @"'";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
