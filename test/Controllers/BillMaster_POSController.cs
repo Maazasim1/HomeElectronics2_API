@@ -48,7 +48,7 @@ namespace test.Controllers
         {
             BillChild_POS i = new BillChild_POS();
             // string query = @"insert into dbo.BillMaster_POS (BillCreatedBy,BillCreatedOn,BillModifiedOn,CustomerName,CustomerPhoneNumber,CustomerAddress,DeliveryCharges,InstallationChares,totalAmount) values ('" + billm.BillCreatedBy + @"','" + DateTime.Now + @"','"  + @"','" + billm.BillModifiedOn + @"','" + billm.CustomerName + @"','" + billm.CustomerPhoneNumber + @"','" + billm.CustomerAddress + @"','" + billm.DeliveryCharges + @"','" + billm.InstallationChares + @" ," + billm.totalAmount + @"')";
-            string query = "Insert into BillMaster_POS values('"+billm.BillCreatedBy+"','"+billm.BillCreatedOn+"',NULL,'"+billm.CustomerCNIC+"','"+billm.DeliveryCharges+","+billm.InstallationChares+","+billm.totalAmount+")";
+            string query = "Insert into BillMaster_POS values('"+billm.BillCreatedBy+"','"+billm.BillCreatedOn+"',NULL,'"+billm.CustomerCNIC+"',"+billm.DeliveryCharges+","+billm.InstallationChares+","+billm.totalAmount+")";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
@@ -77,7 +77,7 @@ namespace test.Controllers
                     
                 }
 
-                string BillMaster = "select BillMasterNo from BillMaster_POS where CustomerName like '" + billm.CustomerCNIC + "' And BillCreatedBy like '" + billm.BillCreatedBy + "'";
+                string BillMaster = "select BillMasterNo from BillMaster_POS where CustomerCNIC like '" + billm.CustomerCNIC + "' And BillCreatedBy like '" + billm.BillCreatedBy + "'";
                 DataTable table3 = new DataTable();
                 using (SqlCommand myCommand = new SqlCommand(BillMaster, myCon))
                 {

@@ -46,9 +46,13 @@ namespace test.Controllers
 
         public JsonResult Post(StockDetails std)
         {
+            string DateToday = DateTime.Today.Day + "/" + DateTime.Today.Month + "/" + DateTime.Today.Year;
             string itemDetailsCheck_query = "Select count(*) from ItemDetails where  ModelNumber like '" + std.Item_ModelNumber + "'";
             //string itemDetails_query = @"insert into dbo.ItemDetails (ItemType,ItemBrand,ModelNumber,UnitPrice) values ('" + std.ItemType + @"','" + std.ItemBrand + @"','" + std.Item_ModelNumber + @"','" + std.UnitPrice + @"')";
-            string query = @"insert into dbo.StockDetails (Item_ModelNumber,WareHouseID,Quantity,StockAdd_Datetime) values ('" + std.Item_ModelNumber + @"','" + std.WareHouseID + @"','" + std.Quantity + @"','" + DateTime.Now + @"')";
+            //  string query = @"insert into dbo.StockDetails (Item_ModelNumber,WareHouseID,Quantity,StockAdd_Datetime) values ('" + std.Item_ModelNumber + @"','" + std.WareHouseID + @"','" + std.Quantity + @"'," + DateToday + @")";
+
+
+            string query = "Insert into StockDetails values('" + std.Item_ModelNumber + "'," + std.WareHouseID + "," + std.UnitPrice + "," + DateToday + "," + std.UnitPrice + ")";
             DataTable table = new DataTable();
             string sqlDataSource = _configuration.GetConnectionString("HomeElectronicsAppCon");
             SqlDataReader myReader;
